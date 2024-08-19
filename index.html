@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Video Detection Interface</h1>
+        <div class="video-container">
+            <img id="video" src="{{ url_for('video_feed') }}">
+        </div>
+        <button id="start-button" onclick="toggleVideo(true)">Start Video</button>
+        <button id="stop-button" onclick="toggleVideo(false)">Stop Video</button>
+    </div>
+
+    <script>
+        var isPlaying = false;
+
+        function toggleVideo(play) {
+            var videoElement = document.getElementById('video');
+            if (play) {
+                if (!isPlaying) {
+                    videoElement.src = "{{ url_for('video_feed') }}";
+                    isPlaying = true;
+                }
+            } else {
+                videoElement.src = "";
+                isPlaying = false;
+            }
+        }
+    </script>
+</body>
+</html>
